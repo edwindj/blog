@@ -65,7 +65,7 @@ its districts. Although a wealthy city, the council had concerns that
 there were large differences in (average) income as well as (average) age. It would also be 
 interesting to know if there was a relation between age and income. Luckily one of the council members living in the Eastern quarter had an old class-mate that did market-research. He conducted the survey and quickly returned with the results.
 
-[^quarters]: Accidentally in some languages quartet is semantically connected to a synonym 
+[^quarters]: Incidentally in some languages quartet is semantically connected to a synonym 
 for district: quartier (fr), quarter (en), kwartier (nl), Viertel (de).
 
 The council was pleased with the outcome of the survey:
