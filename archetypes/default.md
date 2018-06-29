@@ -2,6 +2,7 @@
 title: ""
 date: ""
 categories: "" 
+draft: true
 tags: ""
 ---
 
