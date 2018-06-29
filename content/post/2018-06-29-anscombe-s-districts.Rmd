@@ -2,7 +2,6 @@
 title: Improving Anscombe's quartet
 author: Edwin de Jonge
 date: '2018-06-29'
-draft: false
 slug: improving-anscombes-quartet
 categories: [R, visualisation]
 tags: [rstats]
