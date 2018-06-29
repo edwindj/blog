@@ -17,16 +17,16 @@ library(tidyverse)
 ```
 
 I'm a fan of [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet). 
-As much as I like it, it has a **teaching flaw**, 
+As much as I like it, it has a **teaching problem**, 
 so let's try to improve upon this great data set.
 As intented by its creator Francis Anscombe, the quartet shows that you never, never
 (did I forget to 
 say "never"?) should
 _blindly_ use statistical estimates. Instead you should check your implicit assumptions by making 
 charts of your data.
-Anscombes quartet furthermore makes clear that outliers can heavily bias your statistical result.
+Anscombe's quartet furthermore makes clear that outliers can heavily bias your statistical result.
 
-R is shipped with the `anscombe` data set:
+R is shipped with the `anscombe` dataset:
 
 ```{r}
 data("anscombe")
@@ -48,31 +48,28 @@ you can see that the `anscombe` R data set is not in a
 "handy" or tidy format: the `x` and `y` variables for each dataset are stored in different columns. 
 A more tidy data-model would be a dataset with columns "set","x" and "y".
 
-## Teaching flaw 
+## Teaching problem
 
-The Anscombe data set contains four different data sets each describing the
+The Anscombe dataset contains four different data sets each describing the
 abstract variables $x$  and $y$ having abritary values. $x$ and $y$ may be 
 a statistician/mathematician's default naming convention, but makes the data 
 set difficult to _relate to_ and gives it an _artificial_ smell. Key in data analysis/data science/applied statistics is that you
 understand the data, know what it is about, have some idea of typical values and have a grasp of its applicability. This is missing in Anscombe's great data set, so here an attempt to improve on that point. 
-Lets tweak the data set so that it becomes more "alive". Lets turn the data set from Anscombe quartet into
-__Anscombes quarters__.
+Lets tweak the data set so that it becomes more "alive". Lets turn the data set from Anscombe's quartet into
+__Anscombe's quarters__.
 
 ## Anscombe's quarters[^quarters] (fiction)
 
 The city councel of Anscombe ordered a small survey to monitor the socio-economic differences between
 its districts. Although a wealthy city, the councel had concerns that 
 there were large differences in (average) income as well as (average) age. It would also be 
-interesting to know if there was a relation between age and income. An old class-mate of one of the council members living in the Eastern quarter conducted the survey had returned with 
-a quick result.
+interesting to know if there was a relation between age and income. Luckily one of the council members living in the Eastern quarter had an old class-mate that did market-research. He conducted the survey and quickly returned with the results.
 
 [^quarters]: Accidentally in some languages quartet is semantically connected to a synonym 
 for district: quartier (fr), quarter (en), kwartier (nl), Viertel (de).
 
 The council was pleased with the outcome of the survey:
 ```{r, echo=FALSE}
-kdollars <- function(x){paste0(x, "k$")}
-  
 library(tidyverse)
 anscombe_d <- 
   anscombe %>% 
@@ -86,6 +83,7 @@ anscombe_d <-
         ) %>% 
   select(-row) 
 
+kdollars <- function(x){paste0(x, "k$")}
 anscombe_d %>% 
   group_by(district) %>% 
   summarize( income_mean  = mean(income) %>% round(1) %>% kdollars()
@@ -96,7 +94,7 @@ anscombe_d %>%
 
 The district had the same average income, but what about age?
 
-```{r}
+```{r, echo = FALSE}
 anscombe_d %>% 
   group_by(district) %>% 
   summarize( age_mean = mean(age)
@@ -106,7 +104,7 @@ anscombe_d %>%
 ```
 
 The districts also had the same average age! As an extra check the analyst had provided the (linear)
-relation between age and income per district
+relation between age and income per district:
 
 ```{r}
 anscombe_d %>% 
@@ -120,16 +118,17 @@ anscombe_d %>%
   as.data.frame()
 ```
 So for each year in age, the income increased with 1.000 dollars. 
-So the council as assured that there were absolutely no differences, but should they?
+So the council was assured that there were absolutely no differences, but should they?
 
 On his birthday party the council member was shocked to find out that many of his old class-mates,
-were interviewed for the survey by their mutual friend.  His friend advised to plot the data: 
+were interviewed for the survey by their mutual friend.  So he decided to plot the data: 
 
 ```{r anscombe_districts}
 ggplot(anscombe_d, aes(x = age, y = income)) +  
   geom_point() + 
   geom_smooth(method="lm", se = T, col="red", alpha=0.1) +
-  facet_wrap(~ district) +  scale_y_continuous(labels = function(x){paste0(x, "k$")})
+  facet_wrap(~ district) +  
+  scale_y_continuous(labels = function(x){paste0(x, "k$")})
 ```
 
 The districts are clearly not equal! The data for the Eastern quarter is suspicious, but 
@@ -141,3 +140,25 @@ you analysis with making plots!
 This story may be old hat for you, but for novice data scientist I hope this reformulation offers a work case they can relate to.
 
 Feedback and/or further improvements are welcome!
+
+## Derivation
+
+The `anscombe_d` dataset is derived the following way: 
+
+```{r}
+library(tidyverse)
+anscombe_d <- 
+  anscombe %>% 
+  mutate(row = row_number()) %>% # needed for long -> wide
+  gather(var, value, -row) %>% # wide -> long
+  separate(var, into=c("var", "ds"), sep = 1) %>% 
+  spread(var, value) %>%  # long -> wide
+  mutate( district = factor(ds, 1:4, paste0(c("North", "South", "West", "East"), "ern quarter"))
+        , income = 8 * y # make income in range: [24k-101k] 
+        , age = 4 * x    # make age in range: [16-76]
+        ) %>% 
+  select(district, age, income) 
+
+head(anscombe_d)
+```
+
