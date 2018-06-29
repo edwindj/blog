@@ -1,0 +1,41 @@
+baseurl = "/"
+title = "Stats Explorer"
+copyright = "Copyright &copy; 2018 - Edwin de Jonge"
+canonifyurls = true
+theme = "hugo-kiera"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+paginate = 3
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+pygmentsUseClasses=true
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[author]
+    name = "Edwin de Jonge"
+    github = "edwindj"
+    gitlab = "edwindj"
+    linkedin = "edwinjonge"
+    facebook = ""
+    twitter = "edwindjonge"
+    instagram = ""
+
+[params]
+    tagline = "Irregular comments on visualization and statistical computing"
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudfare.com"
+    highlightjsLang = ["r", "yaml","tex"]
+    highlightjsTheme = "monokai"
+    MathJaxCDN = "//cdn.bootcss.com"
+    MathJaxVersion = "2.7.1"
+
+[params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"
