@@ -10,7 +10,6 @@ paginate = 3
 summaryLength = 30
 enableEmoji = true
 pygmentsCodeFences = true
-pygmentsUseClasses=true
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
@@ -24,13 +23,23 @@ pygmentsUseClasses=true
     twitter = "edwindjonge"
     instagram = ""
 
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+
+[[menu.main]]
+    name = "R-bloggers"
+    url = "https://www.R-bloggers.com"
+
 [params]
-    tagline = "Irregular comments on visualization and statistical computing"
+    tagline = "Irregular comments on R, visualization and statistical computing"
+    categories = true
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
-    highlightjsCDN = "//cdnjs.cloudfare.com"
+    highlightjsCDN = "//cdn.bootcss.com"
     highlightjsLang = ["r", "yaml","tex"]
-    highlightjsTheme = "monokai"
+    highlightjsTheme = "dracula"
+    # for mathjax
     MathJaxCDN = "//cdn.bootcss.com"
     MathJaxVersion = "2.7.1"
 

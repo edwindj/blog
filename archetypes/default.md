@@ -1,9 +1,9 @@
 ---
 title: ""
 date: ""
-categories: "" 
+categories: [R] 
 draft: true
-tags: ""
+tags: [rstats]
 ---
 
 ```{r setup, include=FALSE}

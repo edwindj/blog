@@ -4,8 +4,8 @@ author: Edwin de Jonge
 date: '2018-06-28'
 draft: true
 slug: anscombe-s-districts
-categories: []
-tags: [visualisation]
+categories: [R, visualisation]
+tags: [rstats]
 ---
 
 ```{r setup, include=FALSE}
@@ -28,6 +28,10 @@ head(anscombe)
 ```
 
 As much as I like 
+```{r}
+z <- 1
+```
+
 
 $$
 1/x
