@@ -9,8 +9,8 @@ tags: [rstats]
 
 
 
-<p>I’m a fan of <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s Quartet</a>. As much as I like it, it has a <strong>teaching problem</strong>, so let’s try to improve upon this great data set. As intented by its creator Francis Anscombe, the quartet shows that you never, never (did I forget to say “never”?) should <em>blindly</em> use statistical estimates. Instead you should check your implicit assumptions by making charts of your data. Anscombe’s quartet furthermore makes clear that outliers can heavily bias your statistical result.</p>
-<p>R is shipped with the <code>anscombe</code> dataset:</p>
+<p>I’m a fan of <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s Quartet</a>. As much as I like it, it has a <strong>teaching problem</strong>, so let’s try to improve upon this great data set. As intended by its creator Francis Anscombe, the quartet shows that you should never, never (did I forget to say “never”?) <em>blindly</em> use statistical estimates. Instead you should check your implicit assumptions by making charts of your data. Anscombe’s quartet furthermore makes clear that outliers can heavily bias your statistical result.</p>
+<p>The <code>anscombe</code> dataset is shipped with R:</p>
 <pre class="r"><code>data(&quot;anscombe&quot;)
 head(anscombe, 3)
   x1 x2 x3 x4   y1   y2    y3   y4
@@ -18,15 +18,15 @@ head(anscombe, 3)
 2  8  8  8  8 6.95 8.14  6.77 5.76
 3 13 13 13  8 7.58 8.74 12.74 7.71</code></pre>
 <p>In which <code>x</code> and <code>y</code>’s all have the same mean (<code>9.0</code>,<code>7.5</code>) and variance (<code>11.0</code>, <code>4.1</code>). Each of the data sets has <span class="math inline">\(\beta_0 = 3.0\)</span> and <span class="math inline">\(\beta_1 = 0.5\)</span>.</p>
-<p>I often use the quartet in data visualisation courses. I start with slides showing the data, their identical stats and ask if the students think the four datasets are similar, before showing the plots: I try to lure them into the trap of blindly trusting statistical estimates, without checking their validity in the hope that the message will stick (and of course many students are suspicious that there is a catch).</p>
-<p>Before introducing the didactical flaw (just a little bit more patience…), you can see that the <code>anscombe</code> R data set is not in a “handy” or tidy format: the <code>x</code> and <code>y</code> variables for each dataset are stored in different columns. A more tidy data-model would be a dataset with columns “set”,“x” and “y”.</p>
+<p>I often use the quartet in data visualization courses. I start with slides showing the data, their identical stats and ask if the students think the four datasets are similar, before showing the plots: I try to lure them into the trap of blindly trusting statistical estimates, without checking their validity in the hope that the message will stick (and of course many students are suspicious that there is a catch).</p>
+<p>Before introducing the didactic flaw (just a little bit more patience…), you can see that the <code>anscombe</code> R data set is not in a “handy” or tidy format: the <code>x</code> and <code>y</code> variables for each dataset are stored in different columns. A more tidy data-model would be a dataset with columns “set”,“x” and “y”.</p>
 <div id="teaching-problem" class="section level2">
 <h2>Teaching problem</h2>
-<p>The Anscombe dataset contains four different data sets each describing the abstract variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> having abritary values. <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> may be a statistician/mathematician’s default naming convention, but makes the data set difficult to <em>relate to</em> and gives it an <em>artificial</em> smell. Key in data analysis/data science/applied statistics is that you understand the data, know what it is about, have some idea of typical values and have a grasp of its applicability. This is missing in Anscombe’s great data set, so here an attempt to improve on that point. Lets tweak the data set so that it becomes more “alive”. Lets turn the data set from Anscombe’s quartet into <strong>Anscombe’s quarters</strong>.</p>
+<p>The Anscombe dataset contains four different data sets each describing the abstract variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> having arbitrary values. <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> may be a statistician/mathematician’s default naming convention, but makes the data set difficult to <em>relate to</em> and gives it an <em>artificial</em> smell. Key in data analysis/data science/applied statistics is that you understand the data, know what it is about, have some idea of typical values and have a grasp of its applicability. This is missing in Anscombe’s great data set, so here an attempt to improve on that point. Lets tweak the data set so that it becomes more “alive”. Lets turn the data set from Anscombe’s quartet into <strong>Anscombe’s quarters</strong>.</p>
 </div>
 <div id="anscombes-quartersquarters-fiction" class="section level2">
 <h2>Anscombe’s quarters<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> (fiction)</h2>
-<p>The city councel of Anscombe ordered a small survey to monitor the socio-economic differences between its districts. Although a wealthy city, the councel had concerns that there were large differences in (average) income as well as (average) age. It would also be interesting to know if there was a relation between age and income. Luckily one of the council members living in the Eastern quarter had an old class-mate that did market-research. He conducted the survey and quickly returned with the results.</p>
+<p>The city council of Anscombe ordered a small survey to monitor the socio-economic differences between its districts. Although a wealthy city, the council had concerns that there were large differences in (average) income as well as (average) age. It would also be interesting to know if there was a relation between age and income. Luckily one of the council members living in the Eastern quarter had an old class-mate that did market-research. He conducted the survey and quickly returned with the results.</p>
 <p>The council was pleased with the outcome of the survey:</p>
 <table>
 <thead>
@@ -120,8 +120,8 @@ Eastern quarter           24   1</code></pre>
 <h1>Exit</h1>
 <p>This story may be old hat for you, but for novice data scientist I hope this reformulation offers a work case they can relate to.</p>
 <p>Feedback and/or further improvements are welcome!</p>
-<div id="derivation" class="section level2">
-<h2>Derivation</h2>
+<div id="derivation-of-dataset" class="section level3">
+<h3>Derivation of dataset</h3>
 <p>The <code>anscombe_d</code> dataset is derived the following way:</p>
 <pre class="r"><code>library(tidyverse)
 anscombe_d &lt;- 
@@ -131,8 +131,8 @@ anscombe_d &lt;-
   separate(var, into=c(&quot;var&quot;, &quot;ds&quot;), sep = 1) %&gt;% 
   spread(var, value) %&gt;%  # long -&gt; wide
   mutate( district = factor(ds, 1:4, paste0(c(&quot;North&quot;, &quot;South&quot;, &quot;West&quot;, &quot;East&quot;), &quot;ern quarter&quot;))
-        , income = 8 * y # make income in range: [24k-101k] 
-        , age = 4 * x    # make age in range: [16-76]
+        , income   = 8 * y # make income in range: [24k-101k] 
+        , age      = 4 * x    # make age in range: [16-76]
         ) %&gt;% 
   select(district, age, income) 
 

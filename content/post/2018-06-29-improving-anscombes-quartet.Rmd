@@ -19,14 +19,14 @@ library(tidyverse)
 I'm a fan of [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet). 
 As much as I like it, it has a **teaching problem**, 
 so let's try to improve upon this great data set.
-As intented by its creator Francis Anscombe, the quartet shows that you never, never
+As intended by its creator Francis Anscombe, the quartet shows that you should never, never
 (did I forget to 
-say "never"?) should
+say "never"?)
 _blindly_ use statistical estimates. Instead you should check your implicit assumptions by making 
 charts of your data.
 Anscombe's quartet furthermore makes clear that outliers can heavily bias your statistical result.
 
-R is shipped with the `anscombe` dataset:
+The `anscombe` dataset is shipped with R:
 
 ```{r}
 data("anscombe")
@@ -35,7 +35,7 @@ head(anscombe, 3)
 In which `x` and `y`'s all have the same mean (`9.0`,`7.5`) and variance (`11.0`, `4.1`). Each
 of the data sets has $\beta_0 = 3.0$ and $\beta_1 = 0.5$.
 
-I often use the quartet in data visualisation courses. I start 
+I often use the quartet in data visualization courses. I start 
 with slides showing the data,
 their identical stats and ask if the students think the four datasets are similar, 
 before showing the plots: I try to lure them into the trap of blindly trusting statistical
@@ -43,7 +43,7 @@ estimates,
 without checking their validity in the hope
 that the message will stick (and of course many students are suspicious that there is a catch). 
 
-Before introducing the didactical flaw (just a little bit more patience...), 
+Before introducing the didactic flaw (just a little bit more patience...), 
 you can see that the `anscombe` R data set is not in a 
 "handy" or tidy format: the `x` and `y` variables for each dataset are stored in different columns. 
 A more tidy data-model would be a dataset with columns "set","x" and "y".
@@ -51,7 +51,7 @@ A more tidy data-model would be a dataset with columns "set","x" and "y".
 ## Teaching problem
 
 The Anscombe dataset contains four different data sets each describing the
-abstract variables $x$  and $y$ having abritary values. $x$ and $y$ may be 
+abstract variables $x$  and $y$ having arbitrary values. $x$ and $y$ may be 
 a statistician/mathematician's default naming convention, but makes the data 
 set difficult to _relate to_ and gives it an _artificial_ smell. Key in data analysis/data science/applied statistics is that you
 understand the data, know what it is about, have some idea of typical values and have a grasp of its applicability. This is missing in Anscombe's great data set, so here an attempt to improve on that point. 
@@ -60,8 +60,8 @@ __Anscombe's quarters__.
 
 ## Anscombe's quarters[^quarters] (fiction)
 
-The city councel of Anscombe ordered a small survey to monitor the socio-economic differences between
-its districts. Although a wealthy city, the councel had concerns that 
+The city council of Anscombe ordered a small survey to monitor the socio-economic differences between
+its districts. Although a wealthy city, the council had concerns that 
 there were large differences in (average) income as well as (average) age. It would also be 
 interesting to know if there was a relation between age and income. Luckily one of the council members living in the Eastern quarter had an old class-mate that did market-research. He conducted the survey and quickly returned with the results.
 
@@ -141,7 +141,7 @@ This story may be old hat for you, but for novice data scientist I hope this ref
 
 Feedback and/or further improvements are welcome!
 
-## Derivation
+### Derivation of dataset
 
 The `anscombe_d` dataset is derived the following way: 
 
@@ -154,8 +154,8 @@ anscombe_d <-
   separate(var, into=c("var", "ds"), sep = 1) %>% 
   spread(var, value) %>%  # long -> wide
   mutate( district = factor(ds, 1:4, paste0(c("North", "South", "West", "East"), "ern quarter"))
-        , income = 8 * y # make income in range: [24k-101k] 
-        , age = 4 * x    # make age in range: [16-76]
+        , income   = 8 * y # make income in range: [24k-101k] 
+        , age      = 4 * x    # make age in range: [16-76]
         ) %>% 
   select(district, age, income) 
 
