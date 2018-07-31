@@ -28,6 +28,10 @@ pygmentsCodeFences = true
     url = "/about/"
 
 [[menu.main]]
+    name = "R-weekly"
+    url = "https://rweekly.org"
+
+[[menu.main]]
     name = "R-bloggers"
     url = "https://www.R-bloggers.com"
 
