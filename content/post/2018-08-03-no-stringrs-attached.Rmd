@@ -1,0 +1,51 @@
+---
+title: No stringrs attached
+author: Edwin de Jonge
+date: '2018-08-03'
+slug: no-stringrs-attached
+categories:
+  - R
+tags:
+  - rstats
+draft: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+I just uploaded a version 0.6 of `docopt`, which was long overdue.
+
+[Docopt](https://github.com/docopt/docopt.R) is an R package that helps in parsing command-line 
+options of a R-script. The beauty of docopt is that it uses the help text (i.e. "-h") as its 
+specification, and then `docopt` uses this to create a command-line argument parser. 
+
+```r
+'usage: my_prog.R [-a -r -m <msg>]
+
+options:
+ -a        Add
+ -r        Remote
+ -m <msg>  Message' -> doc
+
+# load the docopt library
+library(docopt)
+# retrieve the command-line arguments
+opts <- docopt(doc)
+```
+
+For more 
+information see my useR!2014 
+[presentation](https://www.slideshare.net/EdwindeJonge1/docopt-user2014).
+
+
+Besides some minor bug fixes (thanks contributors!), the most important thing is the removal 
+`docopt`'s dependency on `stringr` (and therefore `stringi`). `docopt` was a heavy user of `str_extract` and `str_match`, which are great. `stringr` is a very useful and 
+consistent package, which I use a lot in data munging. However as a package maintainer I have
+other responsibilities. Besides providing useful and correct functionality a package should 
+be stable and lean. This is especially true for `docopt` since its use is with Rscripts that run in batch mode. Its foot print should be kept minimal.
+
+Thanks to base R this is possible, but I am certainly not the first to notice :-)
+
+<blockquote class="twitter-tweet" data-lang="nl"><p lang="en" dir="ltr">I try to write low dependency <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> pkgs, but this is only possible b/c R has so much built-in: stats, string manip, low/high level graphics, etc.  And it is stable over time; a bedrock to build on.  Me when I think about it: 🤯.<br><br>Thank you R-Core!</p>&mdash; BrodieG (@BrodieGaslam) <a href="https://twitter.com/BrodieGaslam/status/1024277658966937600?ref_src=twsrc%5Etfw">31 juli 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
