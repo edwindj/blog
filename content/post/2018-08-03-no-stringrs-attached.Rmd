@@ -39,7 +39,7 @@ information see my useR!2014
 [presentation](https://www.slideshare.net/EdwindeJonge1/docopt-user2014).
 
 
-Besides some minor bug fixes (thanks contributors!), the most important thing is the removal 
+Besides some minor bug fixes (thanks contributors!), the most important thing is the removal of
 `docopt`'s dependency on `stringr` (and therefore `stringi`). `docopt` was a heavy user of `str_extract` and `str_match`, which are great. `stringr` is a very useful and 
 consistent package, which I use a lot in data munging. However as a package maintainer I have
 other responsibilities. Besides providing useful and correct functionality a package should 
