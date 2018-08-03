@@ -14,9 +14,9 @@ draft: no
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-I just uploaded a version 0.6 of `docopt`, which was long overdue.
+I just uploaded version 0.6 of `docopt` to CRAN, which was long overdue.
 
-[Docopt](https://github.com/docopt/docopt.R) is an R package that helps in parsing command-line 
+[Docopt](https://github.com/docopt/docopt.R) is a R package that helps in parsing command-line 
 options of a R-script. The beauty of docopt is that it uses the help text (i.e. "-h") as its 
 specification, and then `docopt` uses this to create a command-line argument parser. 
 
